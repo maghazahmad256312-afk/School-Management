@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Users</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search users…" aria-label="Search users" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li class="active"><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <div class="teachers-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Users</h1>
+                    <p class="np-subtitle">Manage system users, roles, and access permissions.</p>
+                </div>
+            </div>
+            <div class="teachers-header-right">
+                <div class="teachers-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="userSearchInput" placeholder="Search users by name, role, class, phone, or email..." autocomplete="off">
+                </div>
+                <button type="button" class="btn-primary" id="addUserBtn">
+                    <i class="fas fa-plus"></i> Add New User
+                </button>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="data-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Roll.no</th>
+                            <th>User Name</th>
+                            <th>Father Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- ADD NEW USER MODAL                            -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="userFormModal" role="dialog" aria-modal="true" aria-labelledby="userFormTitle">
+        <div class="modal user-modal">
+            <div class="modal-header user-modal-header">
+                <div class="user-modal-title-wrap">
+                    <span class="user-modal-icon-badge" aria-hidden="true"><i class="fas fa-user-plus"></i></span>
+                    <div class="user-modal-title-text">
+                        <h2 id="userFormTitle">Add New User</h2>
+                        <p class="user-modal-subtitle">Fill in the details below to create a new user account.</p>
+                    </div>
+                </div>
+                <button type="button" class="modal-close" id="userFormClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body user-modal-body">
+                <form id="userForm" novalidate>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="userInputName">User Name <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <input type="text" id="userInputName" name="name" placeholder="e.g. Ahmad Khan" required>
+                            </div>
+                            <span class="field-error" id="error-user-name"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="userInputFather">Father Name <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-user-tie" aria-hidden="true"></i>
+                                <input type="text" id="userInputFather" name="fatherName" placeholder="e.g. Muhammad Ahmad" required>
+                            </div>
+                            <span class="field-error" id="error-user-father"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="userInputEmail">Email <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <input type="email" id="userInputEmail" name="email" placeholder="e.g. ahmad@school.com" required>
+                            </div>
+                            <span class="field-error" id="error-user-email"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="userInputPhone">Phone <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <input type="text" id="userInputPhone" name="phone" placeholder="e.g. 03001234567" required>
+                            </div>
+                            <span class="field-error" id="error-user-phone"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="userInputRole">Role <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-user-tag" aria-hidden="true"></i>
+                                <select id="userInputRole" name="role" required>
+                                    <option value="">-- Select Role --</option>
+                                    <option value="Student">Student</option>
+                                </select>
+                            </div>
+                            <span class="field-error" id="error-user-role"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="userInputClass">Class <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-school" aria-hidden="true"></i>
+                                <select id="userInputClass" name="className" required>
+                                    <option value="">-- Select Class --</option>
+                                </select>
+                            </div>
+                            <span class="field-error" id="error-user-class"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="userInputStatus">Status <span class="req">*</span></label>
+                            <div class="input-icon-wrap">
+                                <i class="fas fa-toggle-on" aria-hidden="true"></i>
+                                <select id="userInputStatus" name="status" required>
+                                    <option value="">-- Select Status --</option>
+                                    <option value="Active" selected>Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <span class="field-error" id="error-user-status"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer user-modal-footer">
+                <button type="button" class="btn-secondary" id="userFormCancel">Cancel</button>
+                <button type="submit" form="userForm" class="btn-primary" id="userFormSubmit">
+                    <i class="fas fa-plus"></i> Add User
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VIEW USER MODAL                               -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="viewUserModal" role="dialog" aria-modal="true" aria-labelledby="viewUserTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewUserTitle"><i class="fas fa-user"></i> User Details</h2>
+                <button type="button" class="modal-close" id="viewUserClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid" id="viewUserDetails">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="viewUserDone">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

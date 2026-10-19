@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Exams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search exams…" aria-label="Search exams" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li class="active"><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <div class="exams-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-pen-to-square"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Exams</h1>
+                    <p class="np-subtitle">Create and manage exams, schedules, and grading.</p>
+                </div>
+            </div>
+            <div class="exams-header-right">
+                <div class="exams-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="examSearchInput" placeholder="Search exams by name, class, or subject..." autocomplete="off">
+                </div>
+                <button type="button" class="btn-primary" id="addExamBtn">
+                    <i class="fas fa-plus"></i> Create Exam
+                </button>
+            </div>
+        </div>
+
+        <!-- Exams Table -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="data-table" id="examsTable">
+                    <thead>
+                        <tr>
+                            <th>Exam Name</th>
+                            <th>Class</th>
+                            <th>Subject</th>
+                            <th>Exam Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="examsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- EXAM FORM MODAL (Create / Edit)               -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="examFormModal" role="dialog" aria-modal="true" aria-labelledby="examFormTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="examFormTitle"><i class="fas fa-pen-to-square"></i> Create New Exam</h2>
+                <button type="button" class="modal-close" id="examFormClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="examForm" novalidate>
+                    <input type="hidden" id="examIdHidden">
+                    <div class="form-grid">
+                        <div class="form-field full">
+                            <label for="inputExamName">Exam Name <span class="req">*</span></label>
+                            <input type="text" id="inputExamName" name="examName" placeholder="e.g. Mid Term Examination" required>
+                            <span class="field-error" id="error-examName"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputExamClass">Class <span class="req">*</span></label>
+                            <select id="inputExamClass" name="className" required>
+                                <option value="">-- Select Class --</option>
+                            </select>
+                            <span class="field-error" id="error-className"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputExamSubject">Subject <span class="req">*</span></label>
+                            <select id="inputExamSubject" name="subject" required>
+                                <option value="">-- Select Subject --</option>
+                            </select>
+                            <span class="field-error" id="error-subject"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputExamDate">Exam Date <span class="req">*</span></label>
+                            <input type="date" id="inputExamDate" name="date" required>
+                            <span class="field-error" id="error-date"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputExamStatus">Status <span class="req">*</span></label>
+                            <select id="inputExamStatus" name="status" required>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <span class="field-error" id="error-status"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="examFormCancel">Cancel</button>
+                <button type="submit" form="examForm" class="btn-primary" id="examFormSubmit">
+                    <i class="fas fa-save"></i> Create Exam
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VIEW EXAM MODAL                               -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="viewExamModal" role="dialog" aria-modal="true" aria-labelledby="viewExamTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewExamTitle"><i class="fas fa-pen-to-square"></i> Exam Details</h2>
+                <button type="button" class="modal-close" id="viewExamClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid" id="viewExamDetails">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="viewExamDone">Close</button>
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+
+
+    <script src="script.js"></script>
+</html>
+</body>

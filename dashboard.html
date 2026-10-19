@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input
+                type="search"
+                id="globalSearch"
+                placeholder="Search students, teachers, classes…"
+                aria-label="Search dashboard"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="header-actions">
+            <!-- NOTIFICATION BUTTON (unchanged markup, but now functional) -->
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <!-- NEW: Notification dropdown panel -->
+            <div class="notification-panel" id="notificationPanel" role="menu" aria-label="Notifications panel">
+                <div class="notification-panel-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <button type="button" class="notification-mark-all" id="markAllReadBtn">
+                        Mark all as read
+                    </button>
+                </div>
+                <div class="notification-list" id="notificationList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input
+                    type="file"
+                    id="adminProfileFileInput"
+                    accept="image/jpeg,image/jpg,image/png,image/webp"
+                    style="display:none;"
+                    aria-hidden="true"
+                >
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                    <button type="button" id="pdLogin" class="pd-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+        <li class="active"><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <header class="np-page-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-home"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="np-subtitle">Overview of school operations and key metrics.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- STATS CARDS -->
+        <section class="stats-grid" aria-label="Overview statistics">
+            <article class="stat-card" onclick="window.location.href='Students-Page.html'">
+                <div class="stat-icon students"><i class="fas fa-user-graduate"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Students</div>
+                    <div class="stat-value" data-stat="students">1250</div>
+                </div>
+            </article>
+
+            <article class="stat-card" onclick="window.location.href='teachers.html'">
+                <div class="stat-icon teachers"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Teachers</div>
+                    <div class="stat-value" data-stat="teachers">85</div>
+                </div>
+            </article>
+
+            <article class="stat-card" onclick="window.location.href='classes.html'">
+                <div class="stat-icon classes"><i class="fas fa-school"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Classes</div>
+                    <div class="stat-value" data-stat="classes">32</div>
+                </div>
+            </article>
+
+            <article class="stat-card"  onclick="window.location.href='Fees.html'">
+                <div class="stat-icon fees"><i class="fas fa-money-bill-wave"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Fees</div>
+                    <div class="stat-value" data-stat="fees">920</div>
+                </div>
+            </article>
+        </section>
+
+        <!-- QUICK ACTIONS -->
+        <h2 class="section-heading"><i class="fas fa-bolt"></i> Quick Actions</h2>
+        <section class="quick-actions-grid" aria-label="Quick actions">
+            <a class="quick-action-btn" href="Students-Page.html#add">
+                <span class="quick-action-icon qa-students"><i class="fas fa-user-graduate"></i></span>
+                <span class="quick-action-label">Add Student</span>
+            </a>
+            <a class="quick-action-btn" href="teachers.html#add">
+                <span class="quick-action-icon qa-teachers"><i class="fas fa-chalkboard-teacher"></i></span>
+                <span class="quick-action-label">Add Teacher</span>
+            </a>
+            <a class="quick-action-btn" href="classes.html#add">
+                <span class="quick-action-icon qa-classes"><i class="fas fa-school"></i></span>
+                <span class="quick-action-label">Add Class</span>
+            </a>
+            <a class="quick-action-btn" href="subjects.html#add">
+                <span class="quick-action-icon qa-subjects"><i class="fas fa-book"></i></span>
+                <span class="quick-action-label">Add Subject</span>
+            </a>
+            <a class="quick-action-btn" href="exams.html#add">
+                <span class="quick-action-icon qa-exams"><i class="fas fa-pen-to-square"></i></span>
+                <span class="quick-action-label">Create Exam</span>
+            </a>
+            <a class="quick-action-btn" href="results.html#add">
+                <span class="quick-action-icon qa-results"><i class="fas fa-chart-line"></i></span>
+                <span class="quick-action-label">Add Result</span>
+            </a>
+            <a class="quick-action-btn" href="fees.html#add">
+                <span class="quick-action-icon qa-fees"><i class="fas fa-money-bill-wave"></i></span>
+                <span class="quick-action-label">Add Fee</span>
+            </a>
+            <a class="quick-action-btn" href="notices.html#add">
+                <span class="quick-action-icon qa-notices"><i class="fas fa-bullhorn"></i></span>
+                <span class="quick-action-label">Add Notice</span>
+            </a>
+        </section>
+
+        <!-- ATTENDANCE OVERVIEW -->
+        <h2 class="section-heading"><i class="fas fa-chart-column"></i> Attendance Overview</h2>
+        <section class="chart-card" aria-label="Attendance chart">
+            <div class="chart-card-head">
+                <p class="chart-subtitle">Attendance Chart — Classes 5th to 12th</p>
+                <select id="attendanceChartRange" class="chart-range-select" aria-label="Attendance date range">
+                    <option value="0" selected>All Time</option>
+                    <option value="7">Last 7 Days</option>
+                    <option value="14">Last 14 Days</option>
+                    <option value="30">Last 30 Days</option>
+                </select>
+            </div>
+            <div class="attendance-chart-legend" id="attendanceChartLegend" aria-label="Class legend"></div>
+            <div class="chart-area attendance-chart-mode" id="attendanceChart">
+                <!-- Multi-line chart rendered by JS from real attendance records -->
+            </div>
+            <!-- Attendance Totals -->
+            <div class="attendance-totals" style="display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);flex-wrap:wrap;">
+                <div class="total-item present" style="display:flex;align-items:center;gap:0.5rem;color:#15803d;font-weight:600;">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Present: <strong id="dashboardAttendancePresent">0</strong></span>
+                </div>
+                <div class="total-item absent" style="display:flex;align-items:center;gap:0.5rem;color:#b91c1c;font-weight:600;">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Absent: <strong id="dashboardAttendanceAbsent">0</strong></span>
+                </div>
+                <div class="total-item leave" style="display:flex;align-items:center;gap:0.5rem;color:#b45309;font-weight:600;">
+                    <i class="fas fa-calendar-xmark"></i>
+                    <span>Leave: <strong id="dashboardAttendanceLeave">0</strong></span>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+    <!-- ============================================= -->
+    <!-- EDIT PROFILE MODAL                            -->
+    <!-- ============================================= -->
+    <div class="edit-profile-overlay" id="editProfileOverlay" role="dialog" aria-modal="true" aria-labelledby="editProfileTitle">
+        <div class="edit-profile-modal">
+            <div class="modal-header">
+                <h2 id="editProfileTitle"><i class="fas fa-user-pen"></i> Edit Profile</h2>
+                <button type="button" class="modal-close" id="editProfileClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm" novalidate>
+                    <div class="form-field">
+                        <label for="editProfileNameInput">Display Name <span class="req">*</span></label>
+                        <input
+                            type="text"
+                            id="editProfileNameInput"
+                            name="displayName"
+                            placeholder="Enter your display name"
+                            autocomplete="name"
+                            maxlength="60"
+                        >
+                        <span class="field-error" id="error-displayName"></span>
+                    </div>
+                    <div class="form-field">
+                        <label for="editProfileFatherInput">Father Name</label>
+                        <input
+                            type="text"
+                            id="editProfileFatherInput"
+                            name="fatherName"
+                            placeholder="e.g. Muhammad Ahmad"
+                        >
+                    </div>
+                    <div class="form-field">
+                        <label for="editProfileEmailInput">Email <span class="req">*</span></label>
+                        <input
+                            type="email"
+                            id="editProfileEmailInput"
+                            name="email"
+                            placeholder="e.g. admin@school.com"
+                            readonly
+                            required
+                        >
+                    </div>
+                    <div class="form-field">
+                        <label for="editProfilePhoneInput">Phone</label>
+                        <input
+                            type="text"
+                            id="editProfilePhoneInput"
+                            name="phone"
+                            placeholder="e.g. 03001234567"
+                        >
+                    </div>
+                    <div class="form-field">
+                        <label for="editProfileRoleInput">Role <span class="req">*</span></label>
+                        <select
+                            id="editProfileRoleInput"
+                            name="role"
+                            required
+                        >
+                            <option value="">-- Select Role --</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Student">Student</option>
+                            <option value="Staff">Staff</option>
+                        </select>
+                        <span class="field-error" id="error-role"></span>
+                    </div>
+                    <div class="form-field">
+                        <label for="editProfileClassInput">Class</label>
+                        <select
+                            id="editProfileClassInput"
+                            name="className"
+                        >
+                            <option value="">-- Select Class --</option>
+                            <option value="Playgroup">Playgroup</option>
+                            <option value="Nursery">Nursery</option>
+                            <option value="KG">KG</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                            <option value="9th">9th</option>
+                            <option value="10th">10th</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="editProfileCancel">Cancel</button>
+                <button type="submit" form="editProfileForm" class="btn-primary" id="editProfileSave">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- ADD STUDENT MODAL (reuses edit-profile-modal styling) -->
+    <!-- ============================================= -->
+    <div class="edit-profile-overlay" id="addStudentOverlay" role="dialog" aria-modal="true" aria-labelledby="addStudentTitle">
+        <div class="edit-profile-modal">
+            <div class="modal-header">
+                <h2 id="addStudentTitle"><i class="fas fa-user-plus"></i> Add Student</h2>
+                <button type="button" class="modal-close" id="addStudentClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addStudentForm" novalidate>
+                    <div class="form-field">
+                        <label for="addStudentName">Name</label>
+                        <input type="text" id="addStudentName" name="name" placeholder="Enter student name" autocomplete="off" maxlength="60">
+                    </div>
+                    <div class="form-field">
+                        <label for="addStudentClass">Class</label>
+                        <input type="text" id="addStudentClass" name="className" placeholder="e.g. 10th" autocomplete="off" maxlength="20">
+                    </div>
+                    <div class="form-field">
+                        <label for="addStudentPhone">Phone</label>
+                        <input type="text" id="addStudentPhone" name="phone" placeholder="e.g. 03001234567" autocomplete="off" maxlength="20">
+                    </div>
+                    <div class="form-field">
+                        <label for="addStudentStatus">Status</label>
+                        <input type="text" id="addStudentStatus" name="status" placeholder="Active" autocomplete="off" maxlength="20" value="Active">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="addStudentCancel">Cancel</button>
+                <button type="submit" form="addStudentForm" class="btn-primary" id="addStudentSave">
+                    <i class="fas fa-save"></i> Save Student
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html> 

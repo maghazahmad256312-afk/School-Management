@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search results…" aria-label="Search results" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li class="active"><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <header class="np-page-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Results</h1>
+                    <p class="np-subtitle">Record and analyze student exam results.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <div class="results-search-card">
+            <label class="results-search-label" for="studentSearchInput">Search Student</label>
+            <div class="results-search-row">
+                <div class="results-search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearchInput" placeholder="Search Student... (name, ID, or class)" autocomplete="off">
+                </div>
+                <button type="button" class="btn-primary" id="studentSearchBtn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                <button type="button" class="btn-primary" id="addResultBtn" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+                    <i class="fas fa-plus"></i> Add Result
+                </button>
+            </div>
+            <div class="results-search-error" id="searchError">Student not found.</div>
+            <div class="results-match-list" id="matchList">
+                <div class="results-match-list-title">Multiple matches found — click to select:</div>
+                <div id="matchListItems"></div>
+            </div>
+        </div>
+
+        <!-- Student Info Card -->
+        <div class="results-student-card" id="studentCard">
+            <div class="student-avatar" id="studentAvatar">A</div>
+            <div class="student-info">
+                <div class="student-name" id="studentName">—</div>
+                <div class="student-meta">
+                    <span id="studentMetaId">ID: —</span>
+                    <span id="studentMetaClass">Class: —</span>
+                    <span id="studentMetaExam">Exam: —</span>
+                </div>
+            </div>
+            <button type="button" class="btn-secondary" id="printResultBtn">
+                <i class="fas fa-print"></i> Print Result
+            </button>
+        </div>
+
+        <!-- Exam Filter -->
+        <div class="results-exam-filter" id="examFilterWrap">
+            <label for="examFilter">Filter by Exam:</label>
+            <select id="examFilter">
+                <option value="">All Exams</option>
+            </select>
+        </div>
+
+        <!-- Results Table -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="data-table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th class="right">Obtained Marks</th>
+                            <th class="right">Total Marks</th>
+                            <th class="right">Percentage</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                    <tfoot id="resultsTableFoot" style="display: none;">
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td class="right" id="totalObtained">0</td>
+                            <td class="right" id="totalMax">0</td>
+                            <td class="right" colspan="4"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="results-summary" id="resultsSummary">
+            <div class="summary-item">
+                <span class="summary-label">Total Obtained</span>
+                <span class="summary-value" id="summaryObtained">0</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Total Marks</span>
+                <span class="summary-value" id="summaryTotal">0</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Percentage</span>
+                <span class="summary-value percent" id="summaryPercentage">0%</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Overall Grade</span>
+                <span class="summary-value" id="summaryGrade">—</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Status</span>
+                <span class="summary-value" id="summaryStatus">—</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- ADD / EDIT RESULT MODAL                       -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="resultFormModal" role="dialog" aria-modal="true" aria-labelledby="resultFormTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="resultFormTitle"><i class="fas fa-plus"></i> Add Result</h2>
+                <button type="button" class="modal-close" id="resultFormClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="resultForm" novalidate>
+                    <input type="hidden" id="resultIdHidden">
+                    <div class="form-grid">
+                        <div class="form-field full">
+                            <label for="inputResultStudent">Student <span class="req">*</span></label>
+                            <select id="inputResultStudent" name="studentId" required>
+                                <option value="">-- Select Student --</option>
+                            </select>
+                            <span class="field-error" id="error-student"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="inputResultExam">Exam <span class="req">*</span></label>
+                            <select id="inputResultExam" name="examName" required>
+                                <option value="">-- Select Exam --</option>
+                            </select>
+                            <span class="field-error" id="error-exam"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputResultSubject">Subject <span class="req">*</span></label>
+                            <select id="inputResultSubject" name="subject" required>
+                                <option value="">-- Select Subject --</option>
+                            </select>
+                            <span class="field-error" id="error-subject"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputResultObtained">Obtained Marks <span class="req">*</span></label>
+                            <input type="number" id="inputResultObtained" name="obtainedMarks" placeholder="e.g. 85" min="0" required>
+                            <span class="field-error" id="error-obtained"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputResultTotal">Total Marks <span class="req">*</span></label>
+                            <input type="number" id="inputResultTotal" name="totalMarks" placeholder="e.g. 100" min="1" required>
+                            <span class="field-error" id="error-total"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="resultFormCancel">Cancel</button>
+                <button type="submit" form="resultForm" class="btn-primary" id="resultFormSubmit">
+                    <i class="fas fa-save"></i> Save Result
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VIEW RESULT MODAL                             -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="viewResultModal" role="dialog" aria-modal="true" aria-labelledby="viewResultTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewResultTitle"><i class="fas fa-chart-line"></i> Result Details</h2>
+                <button type="button" class="modal-close" id="viewResultClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="viewResultBody">
+                <!-- Populated by JS -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="viewResultDone">Close</button>
+            </div>
+        </div>
+    </div>
+
+   
+      
+    <script src="script.js"></script>
+
+</body>
+</html>

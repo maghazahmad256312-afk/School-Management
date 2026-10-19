@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Notices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-bullhorn"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search notices…" aria-label="Search notices" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar"><i class="fas fa-user"></i></div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo"><i class="fas fa-user"></i></div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile"><i class="fas fa-user-pen"></i> Edit Profile</button>
+                    <button type="button" id="pdChangePhoto"><i class="fas fa-camera"></i> Change Photo</button>
+                    <button type="button" id="pdLogout" class="pd-logout"><i class="fas fa-right-from-bracket"></i> Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li class="active"><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item"><button type="button" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div id="sidebarThemeSlot" class="sidebar-theme-slot" aria-label="Theme switch"></div>
+        </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="np-page">
+
+            <!-- PAGE HEADING -->
+            <header class="np-page-header">
+                <div class="np-heading-info">
+                    <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-bell"></i></div>
+                    <div class="np-heading-text">
+                        <h1 class="page-title">Notices</h1>
+                        <p class="np-subtitle">Stay updated with the latest announcements and important information.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-primary np-add-btn" id="addNoticeBtn">
+                    <i class="fas fa-plus"></i> Add Notice
+                </button>
+            </header>
+
+            <!-- STATISTICS -->
+            <section class="np-stats" aria-label="Notice statistics">
+                <article class="np-stat-card">
+                    <div class="np-stat-icon np-stat-total" aria-hidden="true"><i class="fas fa-bullhorn"></i></div>
+                    <div class="np-stat-text">
+                        <span class="np-stat-value" id="statTotalNotices">0</span>
+                        <span class="np-stat-label">Total Notices</span>
+                    </div>
+                </article>
+                <article class="np-stat-card">
+                    <div class="np-stat-icon np-stat-published" aria-hidden="true"><i class="fas fa-circle-check"></i></div>
+                    <div class="np-stat-text">
+                        <span class="np-stat-value" id="statPublished">0</span>
+                        <span class="np-stat-label">Published</span>
+                    </div>
+                </article>
+                <article class="np-stat-card">
+                    <div class="np-stat-icon np-stat-drafts" aria-hidden="true"><i class="fas fa-file-pen"></i></div>
+                    <div class="np-stat-text">
+                        <span class="np-stat-value" id="statDrafts">0</span>
+                        <span class="np-stat-label">Drafts</span>
+                    </div>
+                </article>
+                <article class="np-stat-card">
+                    <div class="np-stat-icon np-stat-archived" aria-hidden="true"><i class="fas fa-box-archive"></i></div>
+                    <div class="np-stat-text">
+                        <span class="np-stat-value" id="statArchived">0</span>
+                        <span class="np-stat-label">Archived</span>
+                    </div>
+                </article>
+            </section>
+
+            <!-- SEARCH & FILTER TOOLBAR -->
+            <section class="np-toolbar" aria-label="Search and filter notices">
+                <div class="np-toolbar-search notices-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="noticeSearchInput" placeholder="Search notices by title or description…" autocomplete="off" aria-label="Search notices">
+                </div>
+                <div class="np-toolbar-controls">
+                    <select id="noticeCategoryFilter" class="notice-select" aria-label="Filter by category">
+                        <option value="All">All Categories</option>
+                        <option value="Exams">Exams</option>
+                        <option value="Holidays">Holidays</option>
+                        <option value="Events">Events</option>
+                        <option value="Meetings">Meetings</option>
+                        <option value="Admissions">Admissions</option>
+                        <option value="General">General</option>
+                    </select>
+                    <select id="noticeAudienceFilter" class="notice-select" aria-label="Filter by audience">
+                        <option value="All">All Audiences</option>
+                        <option value="All School">All School</option>
+                        <option value="Students">Students</option>
+                        <option value="Teachers">Teachers</option>
+                        <option value="Parents">Parents</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                    <select id="noticeSortBy" class="notice-select" aria-label="Sort notices">
+                        <option value="latest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="title">Title A–Z</option>
+                    </select>
+                    <button type="button" class="btn-secondary np-clear-btn" id="clearFiltersBtn">
+                        <i class="fas fa-filter-circle-xmark"></i> Clear Filters
+                    </button>
+                </div>
+            </section>
+
+            <!-- NOTICE CARDS -->
+            <div class="notices-grid" id="noticesGrid"><!-- Populated by JS --></div>
+
+            <!-- PAGINATION -->
+            <div class="notices-pagination" id="noticesPagination">
+                <span class="page-info" id="pageInfo">Showing 0 of 0 notices</span>
+                <div class="page-buttons" id="pageButtons"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- NOTICE FORM PANEL (right side on desktop, full screen on mobile) -->
+    <div class="modal-overlay np-form-overlay" id="noticeFormModal" role="dialog" aria-modal="true" aria-labelledby="noticeFormTitle">
+        <div class="modal np-form-panel">
+            <div class="modal-header">
+                <h2 id="noticeFormTitle"><i class="fas fa-bullhorn"></i> Add New Notice</h2>
+                <button type="button" class="modal-close" id="noticeFormClose" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="noticeForm" novalidate>
+                    <input type="hidden" id="noticeIdHidden">
+
+                    <div class="form-field">
+                        <label for="inputNoticeTitle">Notice Title <span class="req">*</span></label>
+                        <input type="text" id="inputNoticeTitle" name="title" maxlength="150" placeholder="e.g. Annual Sports Day 2026" required>
+                        <span class="field-error" id="error-noticeTitle"></span>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="inputNoticeCategory">Category <span class="req">*</span></label>
+                            <select id="inputNoticeCategory" name="category" required>
+                                <option value="Exams">Exams</option>
+                                <option value="Holidays">Holidays</option>
+                                <option value="Events">Events</option>
+                                <option value="Meetings">Meetings</option>
+                                <option value="Admissions">Admissions</option>
+                                <option value="General" selected>General</option>
+                            </select>
+                            <span class="field-error" id="error-noticeCategory"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="inputNoticeAudience">Audience <span class="req">*</span></label>
+                            <select id="inputNoticeAudience" name="audience" required>
+                                <option value="All School" selected>All School</option>
+                                <option value="Students">Students</option>
+                                <option value="Teachers">Teachers</option>
+                                <option value="Parents">Parents</option>
+                                <option value="Staff">Staff</option>
+                            </select>
+                            <span class="field-error" id="error-noticeAudience"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field" id="noticeClassField">
+                        <label for="inputNoticeClass">Class <span class="np-optional">(for selected audience)</span></label>
+                        <select id="inputNoticeClass" name="className">
+                            <option value="">All Classes</option>
+                        </select>
+                        <span class="field-error" id="error-noticeClass"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="inputNoticeContent">Description <span class="req">*</span></label>
+                        <textarea id="inputNoticeContent" name="content" maxlength="1000" placeholder="Write the full notice details…" required></textarea>
+                        <div class="np-char-counter" id="contentCharCount" aria-live="polite">0 / 1000</div>
+                        <span class="field-error" id="error-noticeContent"></span>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="inputNoticePostDate">Publish Date <span class="req">*</span></label>
+                            <input type="date" id="inputNoticePostDate" name="postDate" required>
+                            <span class="field-error" id="error-noticePostDate"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="inputNoticeExpDate">Expiry Date <span class="np-optional">(optional)</span></label>
+                            <input type="date" id="inputNoticeExpDate" name="expireDate">
+                            <span class="field-error" id="error-noticeExpDate"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Cover Image <span class="np-optional">(optional)</span></label>
+                        <input type="file" id="inputNoticeCoverImage" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                        <div class="upload-row">
+                            <button type="button" class="btn-secondary" id="coverImageBtn"><i class="fas fa-image"></i> Choose Image</button>
+                            <button type="button" class="np-remove-file" id="coverImageRemoveBtn" hidden><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                        <span class="upload-hint" id="coverImageName">No image selected</span>
+                        <div class="image-preview" id="coverImagePreview"></div>
+                        <span class="np-file-hint">JPG, PNG or WEBP · max 2 MB. Files are stored in this browser (localStorage) only.</span>
+                        <span class="field-error" id="error-noticeCoverImage"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label>PDF Attachment <span class="np-optional">(optional)</span></label>
+                        <input type="file" id="inputNoticeAttachment" accept="application/pdf" style="display:none;">
+                        <div class="upload-row">
+                            <button type="button" class="btn-secondary" id="attachmentBtn"><i class="fas fa-paperclip"></i> Choose PDF</button>
+                            <button type="button" class="np-remove-file" id="attachmentRemoveBtn" hidden><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                        <span class="upload-hint" id="attachmentName">No file selected</span>
+                        <span class="np-file-hint">PDF only · max 2 MB. Files are stored in this browser (localStorage) only.</span>
+                        <span class="field-error" id="error-noticeAttachment"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="inputNoticeStatus">Status <span class="req">*</span></label>
+                        <select id="inputNoticeStatus" name="status">
+                            <option value="Draft">Draft</option>
+                            <option value="Published" selected>Published</option>
+                        </select>
+                        <span class="field-error" id="error-noticeStatus"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="noticeFormReset"><i class="fas fa-rotate-left"></i> Reset</button>
+                <button type="button" class="btn-secondary" id="noticeFormCancel">Cancel</button>
+                <button type="button" class="btn-secondary" id="saveDraftBtn"><i class="fas fa-file-pen"></i> Save as Draft</button>
+                <button type="submit" form="noticeForm" class="btn-primary" id="publishNoticeBtn"><i class="fas fa-paper-plane"></i> Publish Notice</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTICE VIEW DETAILS MODAL -->
+    <div class="modal-overlay" id="noticeViewModal" role="dialog" aria-modal="true" aria-labelledby="noticeViewTitle">
+        <div class="modal np-view-modal">
+            <div class="modal-header">
+                <h2 id="noticeViewTitle"><i class="fas fa-eye"></i> Notice Details</h2>
+                <button type="button" class="modal-close" id="noticeViewClose" aria-label="Close details"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="noticeViewBody">
+                <div class="empty-state">
+                    <i class="fas fa-bullhorn"></i>
+                    <div class="empty-title">No notice selected</div>
+                    <div>Select a notice to view its details.</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="noticeViewEditBtn"><i class="fas fa-pen"></i> Edit</button>
+                <button type="button" class="btn-primary" id="noticeViewCloseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="transientHint" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

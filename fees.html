@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Fees</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+
+    
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search fees…" aria-label="Search fees" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li class="active"><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <div class="fees-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-money-bill-wave"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Fees</h1>
+                    <p class="np-subtitle">Track fee collections, payments, and outstanding balances.</p>
+                </div>
+            </div>
+            <div class="fees-header-right">
+                <div class="fees-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="feesSearchInput" placeholder="Search by student name, ID, or class..." autocomplete="off">
+                </div>
+                <button type="button" class="btn-primary" id="addFeeBtn">
+                    <i class="fas fa-plus"></i> Add Fee
+                </button>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="fees-summary">
+            <div class="summary-card">
+                <div class="summary-icon"><i class="fas fa-money-bill-wave"></i></div>
+                <div class="summary-info">
+                    <div class="summary-label">Total Fees</div>
+                    <div class="summary-value" id="summaryTotal">0</div>
+                </div>
+            </div>
+            <div class="summary-card paid">
+                <div class="summary-icon"><i class="fas fa-circle-check"></i></div>
+                <div class="summary-info">
+                    <div class="summary-label">Paid Fees</div>
+                    <div class="summary-value" id="summaryPaid">0</div>
+                </div>
+            </div>
+            <div class="summary-card unpaid">
+                <div class="summary-icon"><i class="fas fa-clock"></i></div>
+                <div class="summary-info">
+                    <div class="summary-label">Unpaid Fees</div>
+                    <div class="summary-value" id="summaryUnpaid">0</div>
+                </div>
+            </div>
+            <div class="summary-card remaining">
+                <div class="summary-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                <div class="summary-info">
+                    <div class="summary-label">Remaining Fees</div>
+                    <div class="summary-value" id="summaryRemaining">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fees Table -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="data-table" id="feesTable">
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Student ID</th>
+                            <th>Class</th>
+                            <th>Fee Type</th>
+                            <th class="right">Monthly Fee</th>
+                            <th class="right">Paid Amount</th>
+                            <th class="right">Remaining</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feesTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- ADD / EDIT FEE MODAL                          -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="feeFormModal" role="dialog" aria-modal="true" aria-labelledby="feeFormTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="feeFormTitle"><i class="fas fa-plus"></i> Add Fee</h2>
+                <button type="button" class="modal-close" id="feeFormClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="feeForm" novalidate>
+                    <input type="hidden" id="feeIdHidden">
+                    <div class="form-grid">
+                        <div class="form-field full">
+                            <label for="inputFeeStudent">Student <span class="req">*</span></label>
+                            <select id="inputFeeStudent" name="studentId" required>
+                                <option value="">-- Select Student --</option>
+                            </select>
+                            <span class="field-error" id="error-student"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFeeClass">Class <span class="req">*</span></label>
+                            <input type="text" id="inputFeeClass" name="className" placeholder="e.g. 10th" readonly>
+                            <span class="field-error" id="error-class"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFeeAmount">Total Fee Amount <span class="req">*</span></label>
+                            <input type="number" id="inputFeeAmount" name="amount" placeholder="e.g. 5000" min="1" required>
+                            <span class="field-error" id="error-amount"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFeeDueDate">Due Date <span class="req">*</span></label>
+                            <input type="date" id="inputFeeDueDate" name="dueDate" required>
+                            <span class="field-error" id="error-dueDate"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFeeStatus">Status <span class="req">*</span></label>
+                            <select id="inputFeeStatus" name="status" required>
+                                <option value="Unpaid">Unpaid</option>
+                                <option value="Partially Paid">Partially Paid</option>
+                                <option value="Paid">Paid</option>
+                            </select>
+                            <span class="field-error" id="error-status"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="feeFormCancel">Cancel</button>
+                <button type="submit" form="feeForm" class="btn-primary" id="feeFormSubmit">
+                    <i class="fas fa-save"></i> Save Fee
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- PAY FEE MODAL                                 -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="payFeeModal" role="dialog" aria-modal="true" aria-labelledby="payFeeTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="payFeeTitle"><i class="fas fa-money-check-dollar"></i> Pay Fee</h2>
+                <button type="button" class="modal-close" id="payFeeClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid" id="payFeeDetails">
+                    <!-- Populated by JS -->
+                </div>
+                <form id="payFeeForm" novalidate>
+                    <div class="form-field" style="margin-top: 1rem;">
+                        <label for="inputPayAmount">Payment Amount <span class="req">*</span></label>
+                        <input type="number" id="inputPayAmount" name="payAmount" placeholder="e.g. 2500" min="1" required>
+                        <span class="field-error" id="error-payAmount"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="payFeeCancel">Cancel</button>
+                <button type="submit" form="payFeeForm" class="btn-primary btn-success" id="confirmPaymentBtn">
+                    <i class="fas fa-check"></i> Confirm Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VIEW FEE MODAL                                -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="viewFeeModal" role="dialog" aria-modal="true" aria-labelledby="viewFeeTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewFeeTitle"><i class="fas fa-eye"></i> Fee Details</h2>
+                <button type="button" class="modal-close" id="viewFeeClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid" id="viewFeeDetails">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="viewFeeHistoryWrap">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="viewFeeDone">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TRANSIENT SUCCESS / ERROR TOAST (styles for #transientHint already exist) -->
+    <div id="transientHint" role="status" aria-live="polite"></div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

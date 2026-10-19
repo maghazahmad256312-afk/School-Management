@@ -1,0 +1,10 @@
+const fs = require('fs');
+let css = fs.readFileSync('D:\\arr\\style.css', 'utf8');
+let mediaQueries = css.match(/@media[^{]+{/g) || [];
+console.log('@media queries found: ' + mediaQueries.length);
+let supports = css.match(/@supports[^{]+{/g) || [];
+console.log('@supports found: ' + supports.length);
+let keyframes = css.match(/@keyframes[^{]+{/g) || [];
+console.log('@keyframes found: ' + keyframes.length);
+let fontFace = css.match(/@font-face/g) || [];
+console.log('@font-face found: ' + fontFace.length);

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Students</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+      
+</head>
+<body>
+z
+
+
+
+    
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search students…" aria-label="Search students" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li class="active"><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content">
+        <div class="students-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-user-graduate"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Students</h1>
+                    <p class="np-subtitle">Manage student enrollment, profiles, and academic records.</p>
+                </div>
+            </div>
+            <div class="students-header-right">
+                <div class="students-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearchInput" placeholder="Search Student..." autocomplete="off">
+                </div>
+                <button type="button" class="btn-primary" id="addStudentBtn">
+                    <i class="fas fa-plus"></i> Add Student
+                </button>
+            </div>
+        </div>
+
+        <!-- Students Table -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="data-table" id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>Roll.no</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Fee Type</th>
+                            <th class="right">Monthly Fee (PKR)</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- STUDENT FORM MODAL (Add / Edit)               -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="studentFormModal" role="dialog" aria-modal="true" aria-labelledby="studentFormTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="studentFormTitle"><i class="fas fa-user-plus"></i> Add New Student</h2>
+                <button type="button" class="modal-close" id="studentFormClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentForm" novalidate>
+                    <input type="hidden" id="studentIdHidden">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="inputName">Student Name <span class="req">*</span></label>
+                            <input type="text" id="inputName" name="name" placeholder="e.g. Ahmad" required>
+                            <span class="field-error" id="error-name"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFather">Father Name <span class="req">*</span></label>
+                            <input type="text" id="inputFather" name="fatherName" placeholder="e.g. Muhammad Ahmad" required>
+                            <span class="field-error" id="error-father"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputDob">Date of Birth <span class="req">*</span></label>
+                            <input type="date" id="inputDob" name="dob" required>
+                            <span class="field-error" id="error-dob"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputGender">Gender <span class="req">*</span></label>
+                            <select id="inputGender" name="gender" required>
+                                <option value="">-- Select Gender --</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span class="field-error" id="error-gender"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputClass">Class <span class="req">*</span></label>
+                            <select id="inputClass" name="className" required>
+                                <option value="">-- Select Class --</option>
+                            </select>
+                            <span class="field-error" id="error-class"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputMonthlyFee">Monthly Class Fee (PKR)</label>
+                            <input type="text" id="inputMonthlyFee" name="monthlyClassFee" placeholder="Select a class" readonly>
+                            <span class="field-error" id="error-monthlyFee"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputFeeType">Fee Type <span class="req">*</span></label>
+                            <select id="inputFeeType" name="feeType" required>
+                                <option value="">-- Select Fee Type --</option>
+                                <option value="Full Fees">Full Fees (100%)</option>
+                                <option value="Half Fees">Half Fees (50%)</option>
+                                <option value="Free Fees">Free Fees (0%)</option>
+                            </select>
+                            <span class="field-error" id="error-feeType"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="inputMonthlyFeeTotal">Monthly Fee (PKR)</label>
+                            <input type="text" id="inputMonthlyFeeTotal" name="monthlyFee" placeholder="Select a class and fee type" readonly>
+                            <span class="fee-calc-hint" id="feeCalcHint"></span>
+                            <span class="field-error" id="error-monthlyFeeTotal"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="inputPhone">Phone <span class="req">*</span></label>
+                            <input type="text" id="inputPhone" name="phone" placeholder="e.g. 03001234567" required>
+                            <span class="field-error" id="error-phone"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="inputAddress">Address <span class="req">*</span></label>
+                            <textarea id="inputAddress" name="address" placeholder="e.g. Lahore, Pakistan" required></textarea>
+                            <span class="field-error" id="error-address"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="inputStatus">Status <span class="req">*</span></label>
+                            <select id="inputStatus" name="status" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                            <span class="field-error" id="error-status"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="studentFormCancel">Cancel</button>
+                <button type="submit" form="studentForm" class="btn-primary" id="studentFormSubmit">
+                    <i class="fas fa-save"></i> Add Student
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- VIEW STUDENT MODAL                            -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="viewStudentModal" role="dialog" aria-modal="true" aria-labelledby="viewStudentTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="viewStudentTitle"><i class="fas fa-user"></i> Student Details</h2>
+                <button type="button" class="modal-close" id="viewStudentClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid" id="viewStudentDetails">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="viewStudentDone">Close</button>
+            </div>
+        </div>
+    </div>
+
+
+      
+    <!-- TRANSIENT SUCCESS / ERROR TOAST (styles for #transientHint already exist) -->
+    <div id="transientHint" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>

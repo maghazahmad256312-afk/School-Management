@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management · Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ 
+
+    <!-- ============================================= -->
+    <!-- TOP HEADER                                    -->
+    <!-- ============================================= -->
+    <header class="top-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="header-brand">
+            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span>School Management</span>
+        </div>
+
+        <div class="header-search" role="search">
+            <i class="fas fa-search"></i>
+            <input type="search" id="globalSearch" placeholder="Search…" aria-label="Search" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                <i class="far fa-bell"></i>
+                <span class="badge-dot" aria-hidden="true"></span>
+            </button>
+
+            <div class="admin-profile" id="adminProfile" title="Admin">
+                <div class="admin-avatar" id="adminAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="admin-name" id="adminName">Admin</span>
+                <input type="file" id="adminProfileFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;" aria-hidden="true">
+            </div>
+
+            <div class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Profile menu">
+                <div class="profile-dropdown-header">
+                    <div class="profile-dropdown-avatar" id="profileDropdownAvatar" role="button" tabindex="0" title="Change photo" aria-label="Change photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-dropdown-info">
+                        <div class="pd-name" id="pdName">Admin</div>
+                        <div class="pd-email" id="pdEmail">—</div>
+                        <div class="pd-role" id="pdRole">Administrator</div>
+                    </div>
+                </div>
+                <div class="profile-dropdown-actions">
+                    <button type="button" id="pdEditProfile">
+                        <i class="fas fa-user-pen"></i> Edit Profile
+                    </button>
+                    <button type="button" id="pdChangePhoto">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button type="button" id="pdLogout" class="pd-logout">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- SIDEBAR                                       -->
+    <!-- ============================================= -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Students-Page.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+            <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="classes.html"><i class="fas fa-school"></i> Classes</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a></li>
+            <li><a href="exams.html"><i class="fas fa-pen-to-square"></i> Exams</a></li>
+            <li><a href="results.html"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="fees.html"><i class="fas fa-money-bill-wave"></i> Fees</a></li>
+            <li><a href="notices.html"><i class="fas fa-bullhorn"></i> Notices</a></li>
+            <li class="active"><a href="settings.html"><i class="fas fa-gear"></i> Settings</a></li>
+            <li class="logout-item">
+                <button type="button" id="logoutBtn">
+                    <i class="fas fa-right-from-bracket"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ============================================= -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================= -->
+    <main class="main-content settings-page">
+        <header class="np-page-header">
+            <div class="np-heading-info">
+                <div class="np-heading-icon" aria-hidden="true"><i class="fas fa-gear"></i></div>
+                <div class="np-heading-text">
+                    <h1 class="page-title">Settings</h1>
+                    <p class="settings-page-desc np-subtitle">Administrator control center — manage school information, permissions, academics, finances, notifications, appearance, security, integrations, and system maintenance.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================================= -->
+        <!-- 1. GENERAL SCHOOL INFORMATION                 -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-school"></i>
+                <h2>General School Information</h2>
+            </div>
+            <form id="settingsForm" novalidate>
+                <div class="settings-card-body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="schoolNameInput">School Name <span class="req">*</span></label>
+                            <input type="text" id="schoolNameInput" name="schoolName" placeholder="e.g. School Management System" maxlength="120" required>
+                            <span class="field-error" id="error-schoolName"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="schoolMottoInput">School Motto</label>
+                            <input type="text" id="schoolMottoInput" name="schoolMotto" placeholder="e.g. Knowledge is Power" maxlength="160">
+                            <span class="field-error" id="error-schoolMotto"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="schoolPhoneInput">Phone Number <span class="req">*</span></label>
+                            <input type="text" id="schoolPhoneInput" name="schoolPhone" placeholder="e.g. +92 300 1234567" maxlength="30" required>
+                            <span class="field-error" id="error-schoolPhone"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="schoolEmailInput">Email Address <span class="req">*</span></label>
+                            <input type="email" id="schoolEmailInput" name="schoolEmail" placeholder="e.g. school@example.com" maxlength="120" required>
+                            <span class="field-error" id="error-schoolEmail"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="principalNameInput">Principal Name</label>
+                            <input type="text" id="principalNameInput" name="principalName" placeholder="e.g. Mr. Ahmad Khan" maxlength="120">
+                            <span class="field-error" id="error-principalName"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="timeZoneInput">Time Zone</label>
+                            <select id="timeZoneInput" name="timeZone">
+                                <option value="Asia/Karachi">Asia/Karachi (GMT+5)</option>
+                                <option value="Asia/Dubai">Asia/Dubai (GMT+4)</option>
+                                <option value="Asia/Riyadh">Asia/Riyadh (GMT+3)</option>
+                                <option value="Europe/London">Europe/London (GMT+0)</option>
+                                <option value="Europe/Berlin">Europe/Berlin (GMT+1)</option>
+                                <option value="America/New_York">America/New_York (GMT-5)</option>
+                                <option value="UTC">UTC</option>
+                            </select>
+                            <span class="field-error" id="error-timeZone"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="currencyInput">Currency</label>
+                            <select id="currencyInput" name="currency">
+                                <option value="PKR">PKR — Pakistani Rupee</option>
+                                <option value="USD">USD — US Dollar</option>
+                                <option value="EUR">EUR — Euro</option>
+                                <option value="GBP">GBP — British Pound</option>
+                                <option value="AED">AED — UAE Dirham</option>
+                                <option value="SAR">SAR — Saudi Riyal</option>
+                                <option value="INR">INR — Indian Rupee</option>
+                            </select>
+                            <span class="field-error" id="error-currency"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="academicYearStartInput">Academic Year Start Date</label>
+                            <input type="date" id="academicYearStartInput" name="academicYearStart">
+                            <span class="field-error" id="error-academicYearStart"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="academicYearEndInput">Academic Year End Date</label>
+                            <input type="date" id="academicYearEndInput" name="academicYearEnd">
+                            <span class="field-error" id="error-academicYearEnd"></span>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="schoolAddressInput">Full Address <span class="req">*</span></label>
+                            <textarea id="schoolAddressInput" name="schoolAddress" placeholder="e.g. Buner, Khyber Pakhtunkhwa, Pakistan" maxlength="240" required></textarea>
+                            <span class="field-error" id="error-schoolAddress"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label>School Logo</label>
+                            <div class="upload-field">
+                                <div class="upload-preview" id="schoolLogoPreview"><i class="fas fa-school"></i></div>
+                                <div class="upload-actions">
+                                    <button type="button" class="btn-secondary btn-sm" id="schoolLogoUploadBtn">
+                                        <i class="fas fa-upload"></i> Upload / Change Logo
+                                    </button>
+                                    <input type="file" id="schoolLogoFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" hidden>
+                                    <span class="upload-hint">PNG, JPG or WEBP, max 2 MB</span>
+                                </div>
+                            </div>
+                            <span class="field-error" id="error-schoolLogo"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Principal Signature</label>
+                            <div class="upload-field">
+                                <div class="upload-preview" id="principalSignaturePreview"><i class="fas fa-signature"></i></div>
+                                <div class="upload-actions">
+                                    <button type="button" class="btn-secondary btn-sm" id="principalSignatureUploadBtn">
+                                        <i class="fas fa-upload"></i> Upload / Change Signature
+                                    </button>
+                                    <input type="file" id="principalSignatureFileInput" accept="image/jpeg,image/jpg,image/png,image/webp" hidden>
+                                    <span class="upload-hint">PNG, JPG or WEBP, max 2 MB</span>
+                                </div>
+                            </div>
+                            <span class="field-error" id="error-principalSignature"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="button" class="btn-secondary" id="settingsResetBtn">
+                        <i class="fas fa-rotate-left"></i> Reset
+                    </button>
+                    <button type="submit" class="btn-primary" id="settingsSaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 2. USER ROLES & PERMISSIONS                   -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-user-shield"></i>
+                <h2>User Roles &amp; Permissions</h2>
+            </div>
+            <div class="settings-card-body">
+                <p class="settings-card-desc">Control what each role is allowed to do. Changes are saved to this device and apply across the dashboard.</p>
+                <div class="table-scroll permissions-scroll">
+                    <table class="data-table permissions-table" id="permissionsTable">
+                        <!-- Built by JS -->
+                    </table>
+                </div>
+            </div>
+            <div class="settings-card-footer">
+                <button type="button" class="btn-primary" id="permissionsSaveBtn">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 3. ACADEMIC SETTINGS                          -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>Academic Settings</h2>
+            </div>
+            <form id="academicForm" novalidate>
+                <div class="settings-card-body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="academicYearInput">Academic Year <span class="req">*</span></label>
+                            <input type="text" id="academicYearInput" name="academicYear" placeholder="e.g. 2025–2026" maxlength="20" required>
+                            <span class="field-error" id="error-academicYear"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="academicClassesInput">Classes <span class="req">*</span></label>
+                            <input type="text" id="academicClassesInput" name="classes" placeholder="e.g. 6th, 7th, 8th, 9th, 10th" maxlength="200" required>
+                            <span class="field-error" id="error-academicClasses"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="academicSectionsInput">Sections</label>
+                            <input type="text" id="academicSectionsInput" name="sections" placeholder="e.g. A, B, C" maxlength="120">
+                            <span class="field-error" id="error-academicSections"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="academicSubjectsInput">Subjects</label>
+                            <input type="text" id="academicSubjectsInput" name="subjects" placeholder="e.g. Math, English, Physics" maxlength="240">
+                            <span class="field-error" id="error-academicSubjects"></span>
+                        </div>
+                        <div class="form-field full">
+                            <label>Grading System</label>
+                            <div class="table-scroll">
+                                <table class="data-table grading-table" id="gradingTable">
+                                    <thead>
+                                        <tr><th>Grade</th><th>Range</th><th>Min %</th><th>Max %</th></tr>
+                                    </thead>
+                                    <tbody><!-- Built by JS --></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-field full">
+                            <label>Exam Types</label>
+                            <div class="check-row" id="examTypesRow">
+                                <label class="check-item"><input type="checkbox" value="Mid Term"> <span>Mid Term</span></label>
+                                <label class="check-item"><input type="checkbox" value="Final Term"> <span>Final Term</span></label>
+                                <label class="check-item"><input type="checkbox" value="Quiz"> <span>Quiz</span></label>
+                                <label class="check-item"><input type="checkbox" value="Assignment"> <span>Assignment</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="submit" class="btn-primary" id="academicSaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 4. FINANCIAL SETTINGS                         -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-money-bill-wave"></i>
+                <h2>Financial Settings</h2>
+            </div>
+            <form id="financialForm" novalidate>
+                <div class="settings-card-body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="tuitionFeeInput">Tuition Fee <span class="req">*</span></label>
+                            <input type="number" id="tuitionFeeInput" name="tuitionFee" placeholder="e.g. 5000" min="0" step="0.01" required>
+                            <span class="field-error" id="error-tuitionFee"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="transportFeeInput">Transport Fee</label>
+                            <input type="number" id="transportFeeInput" name="transportFee" placeholder="e.g. 1500" min="0" step="0.01">
+                            <span class="field-error" id="error-transportFee"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="examFeeInput">Exam Fee</label>
+                            <input type="number" id="examFeeInput" name="examFee" placeholder="e.g. 1000" min="0" step="0.01">
+                            <span class="field-error" id="error-examFee"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="otherFeesInput">Other Fees</label>
+                            <input type="number" id="otherFeesInput" name="otherFees" placeholder="e.g. 500" min="0" step="0.01">
+                            <span class="field-error" id="error-otherFees"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="financialCurrencyInput">Currency</label>
+                            <select id="financialCurrencyInput" name="currency">
+                                <option value="PKR">PKR — Pakistani Rupee</option>
+                                <option value="USD">USD — US Dollar</option>
+                                <option value="EUR">EUR — Euro</option>
+                                <option value="GBP">GBP — British Pound</option>
+                                <option value="AED">AED — UAE Dirham</option>
+                                <option value="SAR">SAR — Saudi Riyal</option>
+                                <option value="INR">INR — Indian Rupee</option>
+                            </select>
+                            <span class="field-error" id="error-financialCurrency"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="taxPercentageInput">Tax Percentage (%)</label>
+                            <input type="number" id="taxPercentageInput" name="taxPercentage" placeholder="e.g. 5" min="0" max="100" step="0.01">
+                            <span class="field-error" id="error-taxPercentage"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="invoicePrefixInput">Invoice Prefix</label>
+                            <input type="text" id="invoicePrefixInput" name="invoicePrefix" placeholder="e.g. INV-" maxlength="20">
+                            <span class="field-error" id="error-invoicePrefix"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="submit" class="btn-primary" id="financialSaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 5. NOTIFICATION & COMMUNICATION SETTINGS      -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-bell"></i>
+                <h2>Notifications</h2>
+            </div>
+            <form id="notificationsForm" novalidate>
+                <div class="settings-card-body">
+                    <p class="settings-card-desc">Choose which notifications the system sends to parents, students, and staff.</p>
+                    <div class="toggle-list" id="notificationToggles">
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-envelope"></i> Email Notifications</span><span class="toggle-switch"><input type="checkbox" data-key="emailNotifications"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-sms"></i> SMS Notifications</span><span class="toggle-switch"><input type="checkbox" data-key="smsNotifications"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-money-bill-wave"></i> Fee Reminders</span><span class="toggle-switch"><input type="checkbox" data-key="feeReminders"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-clipboard-check"></i> Attendance Alerts</span><span class="toggle-switch"><input type="checkbox" data-key="attendanceAlerts"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-chart-line"></i> Exam Result Notifications</span><span class="toggle-switch"><input type="checkbox" data-key="examResultNotifications"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-bullhorn"></i> Notice Notifications</span><span class="toggle-switch"><input type="checkbox" data-key="noticeNotifications"><span class="toggle-slider"></span></span></label>
+                    </div>
+                    <div class="form-grid" style="margin-top: 1.25rem;">
+                        <div class="form-field full">
+                            <label for="feeReminderTemplateInput">Fee Reminder Message</label>
+                            <textarea id="feeReminderTemplateInput" maxlength="300" placeholder="e.g. Dear Parent, the fee for {student} is due on {date}."></textarea>
+                            <span class="field-error" id="error-feeReminderTemplate"></span>
+                        </div>
+                        <div class="form-field full">
+                            <label for="absenceTemplateInput">Absence Message</label>
+                            <textarea id="absenceTemplateInput" maxlength="300" placeholder="e.g. Dear Parent, {student} was absent today."></textarea>
+                            <span class="field-error" id="error-absenceTemplate"></span>
+                        </div>
+                        <div class="form-field full">
+                            <label for="examResultTemplateInput">Exam Result Message</label>
+                            <textarea id="examResultTemplateInput" maxlength="300" placeholder="e.g. Dear Parent, the result of {exam} for {student} has been published."></textarea>
+                            <span class="field-error" id="error-examResultTemplate"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="submit" class="btn-primary" id="notificationsSaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 6. ATTENDANCE & TIMETABLE SETTINGS            -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-calendar-check"></i>
+                <h2>Attendance &amp; Timetable</h2>
+            </div>
+            <form id="attendanceSettingsForm" novalidate>
+                <div class="settings-card-body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="attendanceTypeInput">Attendance Type</label>
+                            <select id="attendanceTypeInput" name="attendanceType">
+                                <option value="Daily">Daily</option>
+                                <option value="Per Period">Per Period</option>
+                                <option value="Subject-wise">Subject-wise</option>
+                            </select>
+                            <span class="field-error" id="error-attendanceType"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="periodDurationInput">Period Duration (minutes)</label>
+                            <input type="number" id="periodDurationInput" name="periodDuration" placeholder="e.g. 45" min="10" max="180">
+                            <span class="field-error" id="error-periodDuration"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="schoolStartTimeInput">School Start Time</label>
+                            <input type="time" id="schoolStartTimeInput" name="schoolStartTime">
+                            <span class="field-error" id="error-schoolStartTime"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="schoolEndTimeInput">School End Time</label>
+                            <input type="time" id="schoolEndTimeInput" name="schoolEndTime">
+                            <span class="field-error" id="error-schoolEndTime"></span>
+                        </div>
+                        <div class="form-field full">
+                            <label>Working Days</label>
+                            <div class="check-row" id="workingDaysRow">
+                                <label class="check-item"><input type="checkbox" value="Monday"> <span>Mon</span></label>
+                                <label class="check-item"><input type="checkbox" value="Tuesday"> <span>Tue</span></label>
+                                <label class="check-item"><input type="checkbox" value="Wednesday"> <span>Wed</span></label>
+                                <label class="check-item"><input type="checkbox" value="Thursday"> <span>Thu</span></label>
+                                <label class="check-item"><input type="checkbox" value="Friday"> <span>Fri</span></label>
+                                <label class="check-item"><input type="checkbox" value="Saturday"> <span>Sat</span></label>
+                            </div>
+                        </div>
+                        <div class="form-field full">
+                            <label>Holiday List</label>
+                            <div class="holiday-add-row">
+                                <input type="date" id="holidayDateInput" aria-label="Holiday date">
+                                <input type="text" id="holidayNameInput" placeholder="Holiday name, e.g. Eid ul Fitr" maxlength="80" aria-label="Holiday name">
+                                <button type="button" class="btn-primary btn-sm" id="addHolidayBtn">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                            <span class="field-error" id="error-holidays"></span>
+                            <ul class="holiday-list" id="holidayList"><!-- Built by JS --></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="submit" class="btn-primary" id="attendanceSettingsSaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 7. APPEARANCE SETTINGS                        -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-palette"></i>
+                <h2>Appearance</h2>
+            </div>
+            <div class="settings-card-body">
+                <p class="settings-card-desc">Theme is applied instantly across the whole website and remembered on every page.</p>
+                <div class="appearance-grid">
+                    <div class="appearance-block">
+                        <span class="appearance-label">Theme Mode</span>
+                        <div class="theme-choice-row">
+                            <button type="button" class="theme-choice" id="appearanceLightBtn">
+                                <i class="fas fa-sun"></i> Light Mode
+                            </button>
+                            <button type="button" class="theme-choice" id="appearanceDarkBtn">
+                                <i class="fas fa-moon"></i> Dark Mode
+                            </button>
+                        </div>
+                    </div>
+                    <div class="appearance-block">
+                        <span class="appearance-label">Primary Color</span>
+                        <div class="color-swatches" id="primaryColorSwatches">
+                            <button type="button" class="color-swatch" data-color="#3b82f6" style="--swatch:#3b82f6" aria-label="Blue"></button>
+                            <button type="button" class="color-swatch" data-color="#8b5cf6" style="--swatch:#8b5cf6" aria-label="Purple"></button>
+                            <button type="button" class="color-swatch" data-color="#14b8a6" style="--swatch:#14b8a6" aria-label="Teal"></button>
+                            <button type="button" class="color-swatch" data-color="#22c55e" style="--swatch:#22c55e" aria-label="Green"></button>
+                            <button type="button" class="color-swatch" data-color="#f59e0b" style="--swatch:#f59e0b" aria-label="Amber"></button>
+                            <button type="button" class="color-swatch" data-color="#ef4444" style="--swatch:#ef4444" aria-label="Red"></button>
+                        </div>
+                    </div>
+                    <div class="appearance-block">
+                        <span class="appearance-label">Sidebar</span>
+                        <div class="theme-choice-row">
+                            <button type="button" class="theme-choice" id="sidebarExpandedBtn">
+                                <i class="fas fa-arrows-left-right"></i> Expanded
+                            </button>
+                            <button type="button" class="theme-choice" id="sidebarCollapsedBtn">
+                                <i class="fas fa-bars"></i> Collapsed
+                            </button>
+                        </div>
+                    </div>
+                    <div class="appearance-block">
+                        <span class="appearance-label">Language</span>
+                        <select id="languageInput" class="appearance-select">
+                            <option value="en">English</option>
+                            <option value="ur">Urdu</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-card-footer">
+                <button type="button" class="btn-primary" id="appearanceSaveBtn">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 8. SECURITY & BACKUP                          -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-shield-halved"></i>
+                <h2>Security &amp; Backup</h2>
+            </div>
+            <form id="securityForm" novalidate>
+                <div class="settings-card-body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="minPasswordLengthInput">Minimum Password Length</label>
+                            <input type="number" id="minPasswordLengthInput" name="minPasswordLength" placeholder="e.g. 8" min="4" max="32">
+                            <span class="field-error" id="error-minPasswordLength"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="backupFrequencyInput">Backup Frequency</label>
+                            <select id="backupFrequencyInput" name="backupFrequency">
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
+                            <span class="field-error" id="error-backupFrequency"></span>
+                        </div>
+                    </div>
+                    <div class="toggle-list">
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-at"></i> Require Special Character</span><span class="toggle-switch"><input type="checkbox" data-key="requireSpecialChar"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-hashtag"></i> Require Number</span><span class="toggle-switch"><input type="checkbox" data-key="requireNumber"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-mobile-screen"></i> Two-Factor Authentication</span><span class="toggle-switch"><input type="checkbox" data-key="twoFactorAuth"><span class="toggle-slider"></span></span></label>
+                        <label class="toggle-row"><span class="toggle-label"><i class="fas fa-cloud-arrow-down"></i> Automatic Backup</span><span class="toggle-switch"><input type="checkbox" data-key="automaticBackup"><span class="toggle-slider"></span></span></label>
+                    </div>
+                    <div style="margin-top: 1.25rem;">
+                        <button type="button" class="btn-secondary" id="auditLogsBtn">
+                            <i class="fas fa-clipboard-list"></i> Audit Logs
+                        </button>
+                    </div>
+                </div>
+                <div class="settings-card-footer">
+                    <button type="submit" class="btn-primary" id="securitySaveBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 9. INTEGRATIONS                               -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-plug"></i>
+                <h2>Integrations</h2>
+            </div>
+            <div class="settings-card-body">
+                <p class="settings-card-desc">Connect third-party services. These are UI controls only — no external API connections are made.</p>
+                <div class="integrations-grid" id="integrationsGrid">
+                    <div class="integration-card" data-service="googleClassroom">
+                        <div class="integration-icon ic-google"><i class="fab fa-google"></i></div>
+                        <div class="integration-info">
+                            <h3>Google Classroom</h3>
+                            <p>Sync classes, students, and assignments.</p>
+                            <span class="integration-status">Not Connected</span>
+                        </div>
+                        <button type="button" class="btn-secondary btn-sm integration-btn">Connect</button>
+                    </div>
+                    <div class="integration-card" data-service="googleMeet">
+                        <div class="integration-icon ic-meet"><i class="fas fa-video"></i></div>
+                        <div class="integration-info">
+                            <h3>Google Meet</h3>
+                            <p>Host online classes and meetings.</p>
+                            <span class="integration-status">Not Connected</span>
+                        </div>
+                        <button type="button" class="btn-secondary btn-sm integration-btn">Connect</button>
+                    </div>
+                    <div class="integration-card" data-service="zoom">
+                        <div class="integration-icon ic-zoom"><i class="fas fa-video"></i></div>
+                        <div class="integration-info">
+                            <h3>Zoom</h3>
+                            <p>Schedule and manage virtual classrooms.</p>
+                            <span class="integration-status">Not Connected</span>
+                        </div>
+                        <button type="button" class="btn-secondary btn-sm integration-btn">Connect</button>
+                    </div>
+                    <div class="integration-card" data-service="paymentGateway">
+                        <div class="integration-icon ic-payment"><i class="fas fa-credit-card"></i></div>
+                        <div class="integration-info">
+                            <h3>Payment Gateway</h3>
+                            <p>Accept online fee payments securely.</p>
+                            <span class="integration-status">Not Connected</span>
+                        </div>
+                        <button type="button" class="btn-secondary btn-sm integration-btn">Configure</button>
+                    </div>
+                    <div class="integration-card" data-service="smsGateway">
+                        <div class="integration-icon ic-sms"><i class="fas fa-comment-sms"></i></div>
+                        <div class="integration-info">
+                            <h3>SMS Gateway</h3>
+                            <p>Send SMS alerts to parents and staff.</p>
+                            <span class="integration-status">Not Connected</span>
+                        </div>
+                        <button type="button" class="btn-secondary btn-sm integration-btn">Configure</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- 10. SYSTEM MAINTENANCE                        -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-screwdriver-wrench"></i>
+                <h2>System Maintenance</h2>
+            </div>
+            <div class="settings-card-body">
+                <p class="settings-card-desc">Maintenance actions affect this device's stored data. You will be asked to confirm before anything runs.</p>
+                <div class="maintenance-grid">
+                    <button type="button" class="maintenance-btn" id="clearCacheBtn">
+                        <i class="fas fa-broom"></i>
+                        <span>Clear Cache</span>
+                        <small>Clear temporary session data</small>
+                    </button>
+                    <button type="button" class="maintenance-btn" id="dbMaintenanceBtn">
+                        <i class="fas fa-database"></i>
+                        <span>Database Maintenance</span>
+                        <small>Optimize stored records</small>
+                    </button>
+                    <button type="button" class="maintenance-btn" id="checkUpdatesBtn">
+                        <i class="fas fa-arrow-rotate-right"></i>
+                        <span>Check for Updates</span>
+                        <small>Look for a newer version</small>
+                    </button>
+                    <button type="button" class="maintenance-btn danger" id="clearOldLogsBtn">
+                        <i class="fas fa-trash-can"></i>
+                        <span>Clear Old Logs</span>
+                        <small>Remove old activity logs</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- DATABASE MAINTENANCE (Backup / Restore)       -->
+        <!-- ============================================= -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <i class="fas fa-database"></i>
+                <h2>Database Maintenance</h2>
+            </div>
+            <div class="settings-card-body">
+                <p class="settings-card-desc">Download a full backup of all locally stored school data, or restore it from a previous backup file.</p>
+                <div class="backup-actions">
+                    <button type="button" class="btn-primary" id="backupDatabaseBtn">
+                        <i class="fas fa-cloud-arrow-down"></i> Backup Database
+                    </button>
+                    <button type="button" class="btn-secondary" id="restoreDatabaseBtn">
+                        <i class="fas fa-cloud-arrow-up"></i> Restore Database
+                    </button>
+                    <input type="file" id="restoreDatabaseFileInput" accept="application/json,.json" hidden>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================= -->
+    <!-- RESTORE DATABASE CONFIRMATION POPUP           -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="restoreDbModal" role="dialog" aria-modal="true" aria-labelledby="restoreDbTitle">
+        <div class="modal confirm-modal">
+            <div class="modal-header">
+                <h2 id="restoreDbTitle"><i class="fas fa-cloud-arrow-up"></i> Restore Database</h2>
+                <button type="button" class="modal-close" id="restoreDbModalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="confirm-message">Are you sure you want to restore from this backup?</p>
+                <p class="confirm-submessage">This will overwrite the current locally stored data (students, teachers, settings, etc.) with the contents of the backup file.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="restoreDbCancel">Cancel</button>
+                <button type="button" class="btn-primary" id="restoreDbConfirm">
+                    <i class="fas fa-cloud-arrow-up"></i> Restore Database
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ============================================= -->
+    <!-- CHECK FOR UPDATES POPUP                       -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="updatesModal" role="dialog" aria-modal="true" aria-labelledby="updatesModalTitle">
+        <div class="modal confirm-modal">
+            <div class="modal-header">
+                <h2 id="updatesModalTitle"><i class="fas fa-arrow-rotate-right"></i> System Updates</h2>
+                <button type="button" class="modal-close" id="updatesModalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="update-status" id="updateStatus">
+                    <span class="update-status-icon" id="updateStatusIcon"><i class="fas fa-circle-notch fa-spin"></i></span>
+                    <p class="confirm-message" id="updateStatusText">Checking for updates...</p>
+                    <p class="confirm-submessage" id="updateStatusSubtext">Please wait while we check for a newer version.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="updatesModalCancel">Close</button>
+                <button type="button" class="btn-primary" id="updateNowBtn" hidden>
+                    <i class="fas fa-download"></i> Update Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- CLEAR OLD LOGS CONFIRMATION POPUP             -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="clearLogsModal" role="dialog" aria-modal="true" aria-labelledby="clearLogsTitle">
+        <div class="modal confirm-modal">
+            <div class="modal-header">
+                <h2 id="clearLogsTitle"><i class="fas fa-trash-can"></i> Clear Old Logs</h2>
+                <button type="button" class="modal-close" id="clearLogsModalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="confirm-message">Are you sure you want to clear old activity logs?</p>
+                <p class="confirm-submessage">Only old activity logs will be deleted. Students, teachers, classes, subjects, exams, results, fees, notices, settings, and all other school data remain safe.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="clearLogsCancel">Cancel</button>
+                <button type="button" class="btn-primary" id="clearLogsConfirm">
+                    <i class="fas fa-trash-can"></i> Clear Old Logs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- CLEAR CACHE CONFIRMATION POPUP                -->
+    <!-- ============================================= -->
+    <div class="modal-overlay" id="clearCacheModal" role="dialog" aria-modal="true" aria-labelledby="clearCacheTitle">
+        <div class="modal confirm-modal">
+            <div class="modal-header">
+                <h2 id="clearCacheTitle"><i class="fas fa-broom"></i> Clear Cache</h2>
+                <button type="button" class="modal-close" id="clearCacheModalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="confirm-message">Are you sure you want to clear the cache?</p>
+                <p class="confirm-submessage">Students, teachers, classes, fees, settings, and all saved school data remain safe.</p>
+            </div>
+            <div class="modal-footer cache-options">
+                <button type="button" class="btn-secondary" id="clearCacheCancel">Cancel</button>
+                <button type="button" class="btn-primary" id="clearCacheImagesBtn">
+                    <i class="fas fa-images"></i> Clear Cached Images &amp; Files
+                </button>
+                <button type="button" class="btn-primary" id="clearCacheTempBtn">
+                    <i class="fas fa-broom"></i> Clear Temporary Cache
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
