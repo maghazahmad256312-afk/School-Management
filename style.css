@@ -23969,3 +23969,30 @@ html[data-theme="dark"] .btn-secondary:hover {
         font-size: 1.2rem;
     }
 }
+
+/* ============================================================
+   MOBILE NOTIFICATION PANEL (<= 900px only)
+   The panel lives inside .header-actions (position: relative),
+   a small right-aligned icon cluster — so its absolute
+   left/right offsets were measured against that cluster and
+   pushed the panel off the right edge of phones (clipped
+   invisibly by body overflow-x: hidden).
+   On small screens only: pin it to the viewport, centered
+   horizontally, just below the header. Desktop (>= 901px)
+   rules are untouched.
+   ============================================================ */
+@media (max-width: 900px) {
+    .notification-panel {
+        position: fixed;
+        top: calc(var(--header-height) + 8px);
+        left: 0;
+        right: 0;
+        width: min(340px, calc(100vw - 1.5rem));
+        max-width: calc(100vw - 1.5rem);
+        margin: 0 auto;
+    }
+
+    .notification-list {
+        max-height: min(60vh, calc(100vh - var(--header-height) - 6.5rem));
+    }
+}
